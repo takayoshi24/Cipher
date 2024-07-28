@@ -88,6 +88,6 @@ public class Vigenere implements Cipher{
                 return alphabet.charAt(i);
             }
         }
-        return cipherChar; // Shouldn't happen in a well-formed Vigenere cipher
+        return cipherChar;
     }
 }
