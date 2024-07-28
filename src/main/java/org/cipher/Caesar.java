@@ -24,7 +24,7 @@ public class Caesar implements Cipher{
     public String decode(String text) {
         return transform(text, -shift);
     }
-    private int Check_with_alphabet(char item){
+    private int checkWithAlphabet(char item){
         for (int x = 0; x < Alphabet.length; x++)
             if (item == Alphabet[x]) {
                 return x;
@@ -39,7 +39,7 @@ public class Caesar implements Cipher{
             if(Character.toString(textCharacters[x]).equals(" ")){
                 szyfr.append(textCharacters[x]);
             }else {
-                char change = Alphabet[(Check_with_alphabet(textCharacters[x]) + shift) % i];
+                char change = Alphabet[(checkWithAlphabet(textCharacters[x]) + shift) % i];
                 szyfr.append(change);
             }
         }
