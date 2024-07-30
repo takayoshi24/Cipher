@@ -6,7 +6,7 @@ public class Main {
     static Logger logger = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
-        String test = "Lecimy na";
+        String test = "Lecimy! na wiadukt 120! *%^@1";
         logger.info("0: "+test);
        /* Caesar caesar = new Caesar(5);
         String encode = caesar.encode(test);
@@ -25,14 +25,19 @@ public class Main {
         String monoalphabetic_decode2 = monoalphabetic2.decode(monoalphabetic_encode);
         logger.info("2: "+monoalphabetic_decode2);
          */
-
+/*
         Vigenere vigenere = new Vigenere();
         String vinEncode = vigenere.encode(test);
         logger.info("1: "+vinEncode);
         String vinDecode = vigenere.decode(vinEncode);
         logger.info("3: "+vinDecode);
-
-
+*/
+        Playfair playfair = new Playfair();
+        logger.info("*: "+ playfair.returnKeyword());
+        String playEncode = playfair.encode(test);
+        logger.info("1: "+playEncode);
+        String playDecode = playfair.decode(playEncode);
+        logger.info("2: "+playDecode);
 
 
 
