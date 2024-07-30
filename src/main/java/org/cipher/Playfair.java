@@ -10,8 +10,8 @@ public class Playfair implements Cipher{
     private final String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
     private final String upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private final String specialCharacters = "!@#$%^&*()-_=+[]{}|;:'\",.<>?/\\`~";
-    private final String chineseCharacters = "和爱生学文人";
-    private final char chineseChar = '中'; // Chinese character for "middle"
+    private final String chineseCharacters = "和爱生学中 ";
+    private final char chineseChar = '中'; // Chinese character for boger character
     private final String alphabet = digits + lowerCaseLetters + upperCaseLetters + specialCharacters + chineseCharacters;
     private char[][] matrix;
     private String keyword;
@@ -33,21 +33,10 @@ public class Playfair implements Cipher{
         StringBuilder encoded = new StringBuilder();
 
         for (int i = 0; i < text.length(); i += 2) {
-            if (text.charAt(i) == ' ') {
-                encoded.append(' ');
-                i--;
-                continue;
-            }
+
             char a = text.charAt(i);
-            char b = (i + 1 < text.length() && text.charAt(i + 1) != ' ') ? text.charAt(i + 1) : chineseChar;
-            if (b == ' ') {
-                b = chineseChar;
-                i--;
-            }
-            if(b == chineseChar){
-                encoded.append(a);
-                encoded.append(b);
-            }else {
+            char b = (i + 1 < text.length() ? text.charAt(i + 1) : chineseChar);
+
                 int[] posA = findPosition(a);
                 int[] posB = findPosition(b);
 
@@ -65,7 +54,6 @@ public class Playfair implements Cipher{
                     encoded.append(matrix[posB[0]][posA[1]]);
                 }
             }
-        }
 
         return encoded.toString();
     }
@@ -74,21 +62,9 @@ public class Playfair implements Cipher{
     public String decode(String text) {
         StringBuilder decoded = new StringBuilder();
         for (int i = 0; i < text.length(); i += 2) {
-            if (text.charAt(i) == ' ') {
-                decoded.append(' ');
-                i--;
-                continue;
-            }
             char a = text.charAt(i);
-            char b = (i + 1 < text.length() && text.charAt(i + 1) != ' ') ? text.charAt(i + 1) : chineseChar;
-            if (b == ' ') {
-                b = chineseChar;
-                i--;
-            }
-            if(b == chineseChar){
-                decoded.append(a);
-                decoded.append(" ");
-            }else {
+            char b = (i + 1 < text.length()  ? text.charAt(i + 1) : chineseChar);
+
                 int[] posA = findPosition(a);
                 int[] posB = findPosition(b);
 
@@ -107,8 +83,6 @@ public class Playfair implements Cipher{
                 }
             }
 
-            }
-
         return removePadding(decoded.toString());
     }
 
@@ -117,14 +91,10 @@ public class Playfair implements Cipher{
 
         for (int i = 0; i < text.length(); i++) {
             char currentChar = text.charAt(i);
-            if (currentChar != ' ' || currentChar!= chineseChar) {
-                if (prepared.length() > 0 && prepared.charAt(prepared.length() - 1) == currentChar) {
+            if (prepared.length() > 0 && prepared.charAt(prepared.length() - 1) == currentChar) {
                     prepared.append(chineseChar);
                 }
-                prepared.append(currentChar);
-            } else if (currentChar == ' ') {
-                prepared.append(' ');
-            }
+            prepared.append(currentChar);
         }
 
         if (prepared.length() % 2 != 0) {
