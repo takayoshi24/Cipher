@@ -1,5 +1,10 @@
 package org.cipher;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Caesar implements Cipher{
 
     //class fields
@@ -8,7 +13,8 @@ public class Caesar implements Cipher{
     private final String upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private final String specialCharacters = "!@#$%^&*()-_=+[]{}|;:'\",.<>?/\\`~";
     private final String allCharacters = digits + lowerCaseLetters + upperCaseLetters + specialCharacters;
-    private final char[] Alphabet = allCharacters.toCharArray();
+    private final char[] alphabet = allCharacters.toCharArray();
+    private final List<Character> alphabetList = allCharacters.chars().mapToObj(c -> (char) c).collect(Collectors.toList());;
     private final int shift;
 
     public Caesar(int shift) {
@@ -24,22 +30,16 @@ public class Caesar implements Cipher{
     public String decode(String text) {
         return transform(text, -shift);
     }
-    private int checkWithAlphabet(char item){
-        for (int x = 0; x < Alphabet.length; x++)
-            if (item == Alphabet[x]) {
-                return x;
-            }
-        return 0;
-    }
+
     private String transform(String text, int shift) {
         StringBuilder result = new StringBuilder();
         char[] textCharacters = text.toCharArray();
 
-        for (int x = 0; x < text.length(); x++) {
-            if(textCharacters[x] == ' '){
-                result.append(textCharacters[x]);
+       for(char character:textCharacters) {
+            if(textCharacters[character] == ' '){
+                result.append(textCharacters[character]);
             }else {
-                char change = Alphabet[(checkWithAlphabet(textCharacters[x]) + shift) % Alphabet.length];
+                char change = alphabet[(alphabetList.indexOf(textCharacters[character]) + shift) % alphabet.length];
                 result.append(change);
             }
         }
