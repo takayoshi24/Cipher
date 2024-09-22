@@ -35,11 +35,11 @@ public class Caesar implements Cipher{
         StringBuilder result = new StringBuilder();
         char[] textCharacters = text.toCharArray();
 
-       for(char character:textCharacters) {
-            if(textCharacters[character] == ' '){
-                result.append(textCharacters[character]);
+       for(char character: textCharacters) {
+            if(character == ' '){
+                result.append(character);
             }else {
-                char change = alphabet[(alphabetList.indexOf(textCharacters[character]) + shift) % alphabet.length];
+                char change = alphabet[(alphabetList.indexOf(character) + shift) % alphabet.length];
                 result.append(change);
             }
         }
