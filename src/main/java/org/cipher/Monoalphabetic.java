@@ -22,37 +22,37 @@ public class Monoalphabetic implements Cipher{
 
     @Override
     public String encode(String text) {
-        return transform(text, keyMap,false);
+        return transform(text, false);
     }
 
     @Override
     public String decode(String text) {
-        return transform(text, keyMap,true);
+        return transform(text, true);
     }
 
     public Map getKeyMap(){
         return this.keyMap;
     }
-    private Character getKeyByValue(Map<Character, Character> map, Character value) {
-        for (Map.Entry<Character, Character> entry : map.entrySet()) {
+    private Character getKeyByValue(Character value) {
+        for (Map.Entry<Character, Character> entry : keyMap.entrySet()) {
             if (Objects.equals(value, entry.getValue())) {
                 return entry.getKey();
             }
         }
         return null; // Return null if no matching key is found
     }
-    private String transform(String text, Map<Character, Character> map, boolean flag) {
+    private String transform(String text,boolean flag) {
         StringBuilder result = new StringBuilder();
         for (char c : text.toCharArray()) {
             if (flag) {
-                if (map.containsKey(c)) {
-                    result.append(getKeyByValue(map, c));
+                if (keyMap.containsKey(c)) {
+                    result.append(getKeyByValue(c));
                 } else {
                     result.append(c);
                 }
             } else {
-                if (map.containsKey(c)) {
-                    result.append(map.get(c));
+                if (keyMap.containsKey(c)) {
+                    result.append(keyMap.get(c));
                 } else {
                     result.append(c);
                 }
@@ -67,10 +67,7 @@ public class Monoalphabetic implements Cipher{
             shuffledAlphabet.add(c);
         }
         Collections.shuffle(shuffledAlphabet);
-
         for (int i = 0; i < alphabet.length(); i++) {
-            char a = alphabet.charAt(i);
-            char s = shuffledAlphabet.get(i);
             keyMap.put(alphabet.charAt(i), shuffledAlphabet.get(i));
 
         }
