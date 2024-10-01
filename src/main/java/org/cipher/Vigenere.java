@@ -9,7 +9,6 @@ public class Vigenere implements Cipher{
     private final String upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private final String specialCharacters = "!@#$%^&*()-_=+[]{}|;:'\",.<>?/\\`~";
     private final String alphabet = digits + lowerCaseLetters + upperCaseLetters + specialCharacters;
-    private final int x = alphabet.length();
     private char[][] vigenereTable;
     private String keyword;
 
@@ -43,17 +42,17 @@ public class Vigenere implements Cipher{
         StringBuilder result = new StringBuilder();
         int keywordIndex = 0;
 
-        for (char c : text.toCharArray()) {
-            if(!Character.toString(c).equals(" ")) {
+        for (char character : text.toCharArray()) {
+            if(character != ' ') {
                 char keyChar = keyword.charAt(keywordIndex % keyword.length());
                 if (encode) {
-                    result.append(vigenereTable[alphabet.indexOf(keyChar)][alphabet.indexOf(c)]);
+                    result.append(vigenereTable[alphabet.indexOf(keyChar)][alphabet.indexOf(character)]);
                 } else {
-                    result.append(decodeCharacter(keyChar, c));
+                    result.append(decodeCharacter(keyChar, character));
                 }
                 keywordIndex++;
             } else {
-                result.append(c);
+                result.append(character);
             }
         }
 
@@ -73,10 +72,10 @@ public class Vigenere implements Cipher{
     }
 
     private void generateVigenereTable() {
-        char[][] table = new char[x][x];
-        for (int i = 0; i < x; i++) {
-            for (int j = 0; j < x; j++) {
-                table[i][j] = alphabet.charAt((i + j) % x);
+        char[][] table = new char[alphabet.length()][alphabet.length()];
+        for (int i = 0; i < alphabet.length(); i++) {
+            for (int j = 0; j < alphabet.length(); j++) {
+                table[i][j] = alphabet.charAt((i + j) % alphabet.length());
             }
         }
         vigenereTable = table;
