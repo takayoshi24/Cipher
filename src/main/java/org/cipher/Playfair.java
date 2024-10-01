@@ -90,11 +90,10 @@ public class Playfair implements Cipher{
         StringBuilder prepared = new StringBuilder();
 
         for (int i = 0; i < text.length(); i++) {
-            char currentChar = text.charAt(i);
-            if (prepared.length() > 0 && prepared.charAt(prepared.length() - 1) == currentChar) {
+            if (prepared.length() > 0 && prepared.charAt(prepared.length() - 1) == text.charAt(i)) {
                     prepared.append(chineseChar);
                 }
-            prepared.append(currentChar);
+            prepared.append(text.charAt(i));
         }
 
         if (prepared.length() % 2 != 0) {
@@ -145,11 +144,10 @@ public class Playfair implements Cipher{
         StringBuilder result = new StringBuilder();
 
         for (int i = 0; i < text.length(); i++) {
-            char currentChar = text.charAt(i);
-            if (currentChar == chineseChar) {
+            if (text.charAt(i) == chineseChar) {
                 result.append(' ');
             } else {
-                result.append(currentChar);
+                result.append(text.charAt(i));
             }
         }
 
@@ -170,7 +168,7 @@ public class Playfair implements Cipher{
 
     }
 
-    public String returnKeyword(){
+    public String getKeyword(){
         return this.keyword;
     }
 }
