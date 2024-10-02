@@ -1,7 +1,5 @@
-package org.cipher;
+package com.github._takayoshi24;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 

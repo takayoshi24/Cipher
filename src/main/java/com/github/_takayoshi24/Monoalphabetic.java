@@ -1,4 +1,4 @@
-package org.cipher;
+package com.github._takayoshi24;
 
 import java.util.*;
 
