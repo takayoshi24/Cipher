@@ -1,4 +1,4 @@
-package com.github._takayoshi24;
+package com.github.takayoshi24;
 
 import java.util.Random;
 
