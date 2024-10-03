@@ -1,4 +1,4 @@
-package org.cipher;
+package com.github.takayoshi24;
 
 import java.util.HashSet;
 import java.util.Random;

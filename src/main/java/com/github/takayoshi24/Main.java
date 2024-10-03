@@ -1,6 +1,5 @@
-package org.cipher;
+package com.github.takayoshi24;
 
-import java.util.Map;
 import java.util.logging.Logger;
 
 public class Main {
