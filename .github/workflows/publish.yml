@@ -2,7 +2,7 @@ name: Publish Maven package
 
 permissions:
   contents: write
-  packages: write
+  packages: read
 
 on:
   workflow_dispatch:
